@@ -1,33 +1,27 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
+    "name": "mexican-particles/mexican-server",
+    "description": "Backend for MexicanParticles",
     "keywords": [
         "microframework",
         "rest",
         "router",
         "psr7"
     ],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "homepage": "http://github.com/mexican-particles/mexican-server",
     "license": "MIT",
     "authors": [
         {
-            "name": "Josh Lockhart",
-            "email": "info@joshlockhart.com",
-            "homepage": "http://www.joshlockhart.com/"
-        },
-        {
-            "name": "Pierre Berube",
-            "email": "pierre@lgse.com",
-            "homepage": "http://www.lgse.com/"
+            "name": "shztmk",
+            "email": "me@shztmk.dev"
         }
     ],
     "require": {
+        "php": ">=7.3",
         "ext-json": "*",
         "monolog/monolog": "^1.24",
-        "php": ">=7.1",
         "php-di/php-di": "^6.0",
         "slim/psr7": "^0.5",
-        "slim/slim": "^4.1"
+        "slim/slim": "^4.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5"

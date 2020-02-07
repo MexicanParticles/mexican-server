@@ -29,6 +29,8 @@ $dependencies($containerBuilder);
 $repositories = require __DIR__ . '/../app/repositories.php';
 $repositories($containerBuilder);
 
+$containerBuilder->useAnnotations(true);
+
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 

@@ -1,5 +1,6 @@
 .idea/
-/coverage/
+!/coverage/logs/clover.xml
+/coverage
 /vendor/
 /logs/*
 !/logs/README.md

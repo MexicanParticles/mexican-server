@@ -1,6 +1,9 @@
 FROM php:7.4-alpine
 
-RUN apk update
+RUN apk update && \
+    apk add autoconf build-base && \
+    pecl install redis xdebug && \
+    docker-php-ext-enable redis xdebug
 
 ENV TZ Asia/Tokyo
 RUN apk add --no-cache tzdata && \

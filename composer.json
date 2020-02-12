@@ -1,5 +1,5 @@
 {
-    "name": "mexican-particles/mexican-server",
+    "name": "mexican-particles/mexican-php-server",
     "description": "Backend for MexicanParticles",
     "keywords": [
         "microframework",
@@ -7,7 +7,7 @@
         "router",
         "psr7"
     ],
-    "homepage": "http://github.com/mexican-particles/mexican-server",
+    "homepage": "https://github.com/mexican-particles/mexican-php-server",
     "license": "MIT",
     "authors": [
         {

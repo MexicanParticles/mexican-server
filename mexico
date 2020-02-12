@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use App\Utils\CommandInvoker;
+use DI\Container;
+use Slim\App;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+$app = require __DIR__ . '/bootstrap/app.php';
+assert($app instanceof App);
+
+$container = $app->getContainer();
+assert($container instanceof Container);
+
+$bootstrap = new CommandInvoker($container, new Application(), new ConsoleOutput());
+$bootstrap->__invoke('App\Commands');

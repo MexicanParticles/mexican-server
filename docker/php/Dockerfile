@@ -2,7 +2,7 @@ FROM php:7.4-alpine
 
 RUN apk update && \
     apk add autoconf build-base && \
-    pecl install redis xdebug && \
+    pecl install -o -f redis xdebug && \
     docker-php-ext-enable redis xdebug
 
 ENV TZ Asia/Tokyo
@@ -15,4 +15,4 @@ WORKDIR /var/www
 
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 RUN mkdir -p vendor/bin
-ENV PATH /app/www/vendor/bin:${PATH}
+ENV PATH /var/www/vendor/bin:${PATH}

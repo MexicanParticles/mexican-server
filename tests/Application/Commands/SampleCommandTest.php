@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Commands;
+namespace Tests\Application\Commands;
 
-use App\Commands\SampleCommand;
+use App\Application\Commands\SampleCommand;
 use App\Utils\CommandRunnableTrait;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Tester\TesterTrait;
 
 /**
  * @package Tests\Commands
- * @coversDefaultClass \App\Commands\SampleCommand
+ * @coversDefaultClass \App\Application\Commands\SampleCommand
  */
 class SampleCommandTest extends TestCase
 {

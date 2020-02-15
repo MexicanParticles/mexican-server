@@ -19,6 +19,7 @@
         "php": ">=7.3",
         "ext-json": "*",
         "doctrine/annotations": "^1.8",
+        "eloquent/enumeration": "^6.0",
         "illuminate/support": "^6.14",
         "monolog/monolog": "^1.24",
         "php-di/php-di": "^6.0",

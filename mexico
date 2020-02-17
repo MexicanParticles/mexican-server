@@ -3,9 +3,13 @@
 
 use App\Utils\CommandInvoker;
 use DI\Container;
+use Dotenv\Dotenv;
 use Slim\App;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
+
+$dotenv = Dotenv::create(__DIR__);
+$dotenv->load();
 
 $app = require __DIR__ . '/bootstrap/app.php';
 assert($app instanceof App);

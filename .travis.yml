@@ -2,22 +2,32 @@ language: php
 
 dist: trusty
 
+services:
+  - docker
+
 matrix:
   include:
-  - php: 7.3
-  - php: 7.4
-    env: ANALYSIS='true'
-  - php: nightly
+    - php: 7.4
 
-  allow_failures:
-  - php: nightly
+# https://docs.travis-ci.com/user/docker/#using-docker-compose
+# https://github.com/docker/compose/issues/6268
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - sudo chmod +x /usr/local/bin/docker-compose
+
+#install
 
 before_script:
-- composer require php-coveralls/php-coveralls:^2.1.0
-- composer install -n
+  - cp -p .env{.example,}
+  - composer require php-coveralls/php-coveralls:^2.1.0
+  - composer install -n
 
 script:
-- if [[ "$ANALYSIS" == 'true' ]]; then vendor/bin/phpunit --coverage-clover logs/clover.xml ; fi
+  - docker-compose run --rm mx vendor/bin/phpunit --coverage-clover clover.xml
+
+#before_cache
 
 after_success:
-- if [[ "$ANALYSIS" == 'true' ]]; then vendor/bin/php-coveralls --coverage_clover=logs/clover.xml --json_path=logs/coveralls-upload.json  -v ; fi
+  - ls -la .
+  - vendor/bin/php-coveralls --coverage_clover=clover.xml --json_path=coveralls-upload.json  -v

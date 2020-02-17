@@ -1,11 +1,14 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use App\Application\Handlers\HttpErrorHandler;
 use App\Application\Handlers\ShutdownHandler;
 use App\Application\ResponseEmitter\ResponseEmitter;
+use Dotenv\Dotenv;
 use Slim\App;
 use Slim\Factory\ServerRequestCreatorFactory;
+
+$dotenv = Dotenv::create(__DIR__ . '/../');
+$dotenv->load();
 
 $app = require __DIR__ . '/../bootstrap/app.php';
 assert($app instanceof App);

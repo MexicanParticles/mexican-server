@@ -1,13 +1,9 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 use DI\ContainerBuilder;
-use Dotenv\Dotenv;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
-
-$dotenv = Dotenv::create(__DIR__ . '/../');
-$dotenv->load();
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();

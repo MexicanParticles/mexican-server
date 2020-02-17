@@ -22,7 +22,6 @@ services:
             - logs:/var/www/logs
 
     redis:
-        env_file: .env
         hostname: ${REDIS_NAME}
         image: redis:alpine
         networks:

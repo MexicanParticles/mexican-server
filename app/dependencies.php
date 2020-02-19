@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use DI\ContainerBuilder;
+use Illuminate\Config\Repository;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
@@ -9,18 +10,18 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 
-return function (ContainerBuilder $containerBuilder) {
+return function (ContainerBuilder $containerBuilder): void {
     $containerBuilder->addDefinitions([
         LoggerInterface::class => function (ContainerInterface $c): LoggerInterface {
             $settings = $c->get('settings');
+            assert($settings instanceof Repository);
 
-            $loggerSettings = $settings['logger'];
-            $logger = new Logger($loggerSettings['name']);
+            $logger = new Logger($settings->get('logger.name'));
 
             $processor = new UidProcessor();
             $logger->pushProcessor($processor);
 
-            $handler = new StreamHandler($loggerSettings['path'], $loggerSettings['level']);
+            $handler = new StreamHandler($settings->get('logger.path'), $settings->get('logger.level'));
             $logger->pushHandler($handler);
 
             return $logger;

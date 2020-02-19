@@ -12,7 +12,7 @@ return function (ContainerBuilder $containerBuilder): void {
             'displayErrorDetails' => true, // Should be set to false in production
             'logger' => [
                 'name' => 'slim-app',
-                'path' => '/../logs/app.log',
+                'path' => '../logs/app.log',
                 'level' => Logger::DEBUG,
             ],
         ]),

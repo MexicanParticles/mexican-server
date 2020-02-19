@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Infrastructure\Redis;
+namespace Tests\Infrastructure\Cache\Redis;
 
 use Exception;
 use Redis;
 use Tests\TestCase;
 
 /**
- * @package Tests\Infrastructure\Redis
+ * @package Tests\Infrastructure\Cache\Redis
  */
 class ConnectRedisTest extends TestCase
 {

@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Infrastructure\Redis;
+namespace Tests\Infrastructure\Cache\Redis;
 
-use App\Infrastructure\Redis\RedisStackableTrait;
+use App\Infrastructure\Cache\Redis\RedisStackableTrait;
 use JsonSerializable;
 use Redis;
 use Tests\TestCase;
 
 /**
- * @package Tests\Infrastructure\Redis
+ * @package Tests\Infrastructure\Cache\Redis
  * @TODO add tests for exceptions
  */
 class RedisStackableTest extends TestCase

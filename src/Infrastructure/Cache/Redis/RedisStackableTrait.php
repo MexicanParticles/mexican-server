@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\Redis;
+namespace App\Infrastructure\Cache\Redis;
 
 use JsonSerializable;
 use Redis;
@@ -8,7 +8,7 @@ use UnexpectedValueException;
 
 /**
  * Behave as stack using the list of Redis.
- * @package App\Infrastructure\Redis
+ * @package App\Infrastructure\Cache\Redis
  * @see https://github.com/phpredis/phpredis#sorted-sets
  * @property Redis $redis
  */

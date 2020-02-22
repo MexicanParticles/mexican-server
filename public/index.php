@@ -7,6 +7,8 @@ use Dotenv\Dotenv;
 use Slim\App;
 use Slim\Factory\ServerRequestCreatorFactory;
 
+require __DIR__ . '/../vendor/autoload.php';
+
 $dotenv = Dotenv::create(__DIR__ . '/../');
 $dotenv->load();
 
@@ -49,4 +51,3 @@ $errorMiddleware->setDefaultErrorHandler($errorHandler);
 $response = $app->handle($request);
 $responseEmitter = new ResponseEmitter();
 $responseEmitter->emit($response);
-var_dump($container->getKnownEntryNames());

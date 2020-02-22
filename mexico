@@ -8,6 +8,8 @@ use Slim\App;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
+require __DIR__ . '/vendor/autoload.php';
+
 $dotenv = Dotenv::create(__DIR__);
 $dotenv->load();
 
@@ -18,4 +20,4 @@ $container = $app->getContainer();
 assert($container instanceof Container);
 
 $bootstrap = new CommandInvoker($container, new Application(), new ConsoleOutput());
-$bootstrap->__invoke('App\Commands');
+$bootstrap->__invoke('App\Application\Commands');

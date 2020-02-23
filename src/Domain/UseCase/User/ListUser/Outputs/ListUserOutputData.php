@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Domain\UseCase\User\ListUser\Outputs;
 
@@ -11,8 +13,7 @@ class ListUserOutputData
      * @var Collection<User>
      */
     private $userCollection;
-
-    /**
+/**
      * @param Collection<User> $userCollection
      */
     public function __construct(Collection $userCollection)

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Domain\UseCase\User\ViewUser\Outputs;
 
@@ -10,8 +12,7 @@ class ViewUserOutputData
      * @var User
      */
     private $user;
-
-    /**
+/**
      * @param User $user
      */
     public function __construct(User $user)

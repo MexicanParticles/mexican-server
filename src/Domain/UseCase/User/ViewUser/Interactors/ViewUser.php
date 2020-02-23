@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Domain\UseCase\User\ViewUser\Interactors;
 
@@ -15,14 +17,12 @@ class ViewUser implements ViewUserInputBoundary
      * @var UserRepository
      */
     private $repository;
-
-    /**
+/**
      * @inject
      * @var ViewUserOutputBoundary
      */
     private $outputBoundary;
-
-    /**
+/**
      * @param UserRepository         $repository
      * @param ViewUserOutputBoundary $outputBoundary
      */
@@ -41,7 +41,6 @@ class ViewUser implements ViewUserInputBoundary
         $user = $this
             ->repository
             ->findUserById($input->getUserId());
-
         return $this
             ->outputBoundary
             ->__invoke(new ViewUserOutputData($user));

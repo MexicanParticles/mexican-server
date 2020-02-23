@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\Infrastructure\Cache\Redis;
 
@@ -23,8 +25,9 @@ class RedisStackableTest extends TestCase
         parent::setUp();
         $app = $this->getAppInstance();
         $redis = $app->getContainer()->get(Redis::class);
-        $this->redis = new class($redis) {
+        $this->redis = new class ($redis) {
             use RedisStackableTrait;
+
             private $redis;
 
             public function __construct(Redis $redis)
@@ -57,7 +60,7 @@ class RedisStackableTest extends TestCase
 
     public function testPublicMethodsWithCollectionWithJsonSerializable(): void
     {
-        $jsonSerializableA = new class() implements JsonSerializable {
+        $jsonSerializableA = new class () implements JsonSerializable {
             /**
              * @return string
              */
@@ -66,7 +69,7 @@ class RedisStackableTest extends TestCase
                 return 'hogehoge';
             }
         };
-        $jsonSerializableB = new class() implements JsonSerializable {
+        $jsonSerializableB = new class () implements JsonSerializable {
             /**
              * @return string
              */
@@ -75,7 +78,7 @@ class RedisStackableTest extends TestCase
                 return 'fugafuga';
             }
         };
-        $jsonSerializableC = new class() implements JsonSerializable {
+        $jsonSerializableC = new class () implements JsonSerializable {
             /**
              * @return string
              */

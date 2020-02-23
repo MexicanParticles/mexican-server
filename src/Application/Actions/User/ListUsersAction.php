@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Application\Actions\User;
-
 
 use App\Application\Converter\User\ListUserRequestConverter;
 use App\Domain\UseCase\User\ListUser\Inputs\ListUserInputBoundary;

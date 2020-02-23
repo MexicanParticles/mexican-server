@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Domain\UseCase\User\ListUser\Interactors;
 
@@ -15,14 +17,12 @@ class ListUser implements ListUserInputBoundary
      * @var UserRepository
      */
     private $repository;
-
-    /**
+/**
      * @inject
      * @var ListUserOutputBoundary
      */
     private $outputBoundary;
-
-    /**
+/**
      * @param UserRepository         $repository
      * @param ListUserOutputBoundary $outputBoundary
      */
@@ -41,7 +41,6 @@ class ListUser implements ListUserInputBoundary
         $userCollection = $this
             ->repository
             ->findAll();
-
         return $this
             ->outputBoundary
             ->__invoke(new ListUserOutputData($userCollection));

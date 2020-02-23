@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Utils;
 
@@ -24,8 +26,9 @@ trait CommandRunnableTrait
         Command $command,
         InputInterface $input,
         OutputInterface $output
-    ): int  {
-        $application = new class() extends Application {};
+    ): int {
+        $application = new class () extends Application {
+        };
 
         $application->add($command);
         $application->setAutoExit(false);

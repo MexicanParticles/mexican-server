@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\Utils;
 
@@ -53,6 +55,7 @@ class ComparableEnumerationTraitTest extends TestCase
     }
 }
 
+// @codingStandardsIgnoreStart
 /**
  * As the constructor of AbstractEnumeration is protected, it can not call as anonymous class.
  * @method static self FOO()
@@ -64,6 +67,7 @@ class ConcreteComparableEnumeration extends AbstractEnumeration
 {
     use ComparableEnumerationTrait;
 
-    const FOO = 0;
-    const BAR_BAZ = 1;
+    public const FOO = 0;
+    public const BAR_BAZ = 1;
 }
+// @codingStandardsIgnoreEnd

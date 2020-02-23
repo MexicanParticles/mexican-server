@@ -78,7 +78,7 @@ class User implements JsonSerializable
     /**
      * {@inheritDoc}
      */
-    public function jsonSerialize($options = 0): array
+    public function jsonSerialize(): array
     {
         return [
             'id' => $this->id,

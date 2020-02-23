@@ -15,6 +15,9 @@ abstract class BasePresenter
      */
     private $responseFactory;
 
+    /**
+     * @param ResponseFactoryInterface $responseFactory
+     */
     public function __construct(ResponseFactoryInterface $responseFactory)
     {
         $this->responseFactory = $responseFactory;
@@ -37,6 +40,7 @@ abstract class BasePresenter
     protected function respond(ActionPayload $payload): Response
     {
         $json = json_encode($payload, JSON_PRETTY_PRINT);
+        assert(is_string($json));
         $response = $this->responseFactory->createResponse();
         $response->getBody()->write($json);
         return $response->withHeader('Content-Type', 'application/json');

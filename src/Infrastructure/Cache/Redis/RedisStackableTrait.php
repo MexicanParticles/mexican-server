@@ -24,7 +24,7 @@ trait RedisStackableTrait
     public function setAsStack(iterable $iterable, string $key): void
     {
         if (false === $this->isEmpty($key)) {
-            throw new RedisKeyAlreadyExistsException('key: %s already exists', $key);
+            throw new RedisKeyAlreadyExistsException(sprintf('key: %s already exists', $key));
         }
 
         foreach ($iterable as $element) {
@@ -49,7 +49,7 @@ trait RedisStackableTrait
     {
         $popped = $this->redis->lPop($key);
         if (false === $popped) {
-            throw new RedisKeyNotExistsException('key: %s not exists', $key);
+            throw new RedisKeyNotExistsException(sprintf('key: %s not exists', $key));
         }
         assert(is_string($popped));
         return $popped;

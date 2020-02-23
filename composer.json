@@ -52,6 +52,9 @@
     },
     "scripts": {
         "start": "php -S localhost:8080 -t public",
-        "test": "phpunit"
+        "test": "phpunit",
+        "phpcbf": "phpcbf --standard=./phpcs.xml -d memory_limit=1G --cache=.phpcs_cache -p",
+        "phpcs": "phpcs --standard=./phpcs.xml -d memory_limit=1G --cache=.phpcs_cache -p --report=code",
+        "phpstan": "phpstan analyse -c phpstan.neon --memory-limit=1G"
     }
 }

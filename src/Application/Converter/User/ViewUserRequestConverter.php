@@ -9,7 +9,14 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class ViewUserRequestConverter implements ViewUserInputDataInterface
 {
+    /**
+     * @var Request
+     */
     private $request;
+
+    /**
+     * @param Request $request
+     */
     public function __construct(Request $request)
     {
         $this->request = $request;

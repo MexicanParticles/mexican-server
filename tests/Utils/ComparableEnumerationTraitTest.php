@@ -21,7 +21,7 @@ class ComparableEnumerationTraitTest extends TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setAssertionSetting();
         parent::setUp();
@@ -30,7 +30,7 @@ class ComparableEnumerationTraitTest extends TestCase
     /**
      * {@inheritDoc}
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->revertAssertionSetting();
         parent::tearDown();

@@ -1,5 +1,8 @@
 [D]
 dotenv
 
+[I]
+interactors
+
 [M]
 multiton

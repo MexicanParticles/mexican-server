@@ -35,8 +35,7 @@ class SampleCommandTest extends TestCase
             new ArrayInput(['command' => 'sample:test']),
             $this->output
         );
-        $aaa = $this->getDisplay();
 
-        self::assertSame("Done\n", $aaa);
+        self::assertSame("Done\n", $this->getDisplay());
     }
 }

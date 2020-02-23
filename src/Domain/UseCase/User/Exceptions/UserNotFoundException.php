@@ -1,9 +1,8 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
-namespace App\Domain\User;
+namespace App\Domain\UseCase\User\Exceptions;
 
-use App\Domain\DomainException\DomainRecordNotFoundException;
+use App\Domain\Exceptions\DomainRecordNotFoundException;
 
 class UserNotFoundException extends DomainRecordNotFoundException
 {

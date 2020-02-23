@@ -1,22 +1,20 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Application\Actions\User;
 
+use App\Application\Converter\User\ViewUserRequestConverter;
+use App\Domain\UseCase\User\ViewUser\Inputs\ViewUserInputBoundary;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class ViewUserAction extends UserAction
+class ViewUserAction
 {
     /**
-     * {@inheritdoc}
+     * @param ViewUserRequestConverter $input
+     * @param ViewUserInputBoundary $inputBoundary
+     * @return Response
      */
-    protected function action(): Response
+    public function __invoke(ViewUserRequestConverter $input, ViewUserInputBoundary $inputBoundary): Response
     {
-        $userId = (int) $this->resolveArg('id');
-        $user = $this->userRepository->findUserOfId($userId);
-
-        $this->logger->info("User of id `${userId}` was viewed.");
-
-        return $this->respondWithData($user);
+        return $inputBoundary->__invoke($input);
     }
 }

@@ -1,8 +1,8 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
-namespace App\Domain\User;
+namespace App\Domain\Model\User\Entities;
 
+use Illuminate\Contracts\Support\Jsonable;
 use JsonSerializable;
 
 class User implements JsonSerializable
@@ -28,10 +28,10 @@ class User implements JsonSerializable
     private $lastName;
 
     /**
-     * @param int|null  $id
-     * @param string    $username
-     * @param string    $firstName
-     * @param string    $lastName
+     * @param int|null $id
+     * @param string   $username
+     * @param string   $firstName
+     * @param string   $lastName
      */
     public function __construct(?int $id, string $username, string $firstName, string $lastName)
     {
@@ -74,9 +74,9 @@ class User implements JsonSerializable
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
-    public function jsonSerialize()
+    public function jsonSerialize($options = 0): array
     {
         return [
             'id' => $this->id,

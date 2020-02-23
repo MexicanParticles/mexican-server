@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Presenters\User\ListUserPresenter;
+use App\Application\Presenters\User\ViewUserPresenter;
+use App\Domain\UseCase\User\ListUser\Interactors\ListUser;
+use App\Domain\UseCase\User\ViewUser\Interactors\ViewUser;
+use App\Infrastructure\Persistence\User\InMemoryUserRepository;
 use DI\ContainerBuilder;
 use Illuminate\Config\Repository;
 use Monolog\Handler\StreamHandler;
@@ -8,6 +13,7 @@ use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Slim\Psr7\Factory\ResponseFactory;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 
 return function (ContainerBuilder $containerBuilder): void {
@@ -39,6 +45,24 @@ return function (ContainerBuilder $containerBuilder): void {
                     'read_timeout' => 0,
                     'retry_interval' => 0,
                 ]
+            );
+        },
+        ViewUserPresenter::class => function (ContainerInterface $c): ViewUserPresenter {
+            return new ViewUserPresenter(new ResponseFactory());
+        },
+        ViewUser::class => function (ContainerInterface $c): ViewUser {
+            return new ViewUser(
+                $c->get(InMemoryUserRepository::class),
+                $c->get(ViewUserPresenter::class),
+            );
+        },
+        ListUserPresenter::class => function (ContainerInterface $c): ListUserPresenter {
+            return new ListUserPresenter(new ResponseFactory());
+        },
+        ListUser::class => function (ContainerInterface $c): ListUser {
+            return new ListUser(
+                $c->get(InMemoryUserRepository::class),
+                $c->get(ListUserPresenter::class),
             );
         },
     ]);

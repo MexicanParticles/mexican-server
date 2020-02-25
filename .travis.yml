@@ -25,11 +25,7 @@ before_script:
 script:
   - |
     if [[ "${ANALYSIS}" == 'true' ]]; then
-      composer phpcs
-    fi
-  - |
-    if [[ "${ANALYSIS}" == 'true' ]]; then
-      composer phpstan_test
+      composer analyze
     fi
   - |
     if [[ "${ANALYSIS}" == 'true' ]]; then

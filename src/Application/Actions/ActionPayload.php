@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Actions;
 
+use Illuminate\Support\Collection;
 use JsonSerializable;
 
 class ActionPayload implements JsonSerializable
@@ -14,7 +15,7 @@ class ActionPayload implements JsonSerializable
     private $statusCode;
 
     /**
-     * @var array|object|null
+     * @var Collection|JsonSerializable|null
      */
     private $data;
 
@@ -24,9 +25,9 @@ class ActionPayload implements JsonSerializable
     private $error;
 
     /**
-     * @param int                   $statusCode
-     * @param array|object|null     $data
-     * @param ActionError|null      $error
+     * @param int                              $statusCode
+     * @param Collection|JsonSerializable|null $data
+     * @param ActionError|null                 $error
      */
     public function __construct(
         int $statusCode = 200,
@@ -47,7 +48,7 @@ class ActionPayload implements JsonSerializable
     }
 
     /**
-     * @return array|null|object
+     * @return Collection|JsonSerializable|null
      */
     public function getData()
     {
@@ -63,9 +64,9 @@ class ActionPayload implements JsonSerializable
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $payload = [
             'statusCode' => $this->statusCode,

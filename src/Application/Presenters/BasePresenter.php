@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Application\Presenters;
 
 use App\Application\Actions\ActionPayload;
+use Illuminate\Support\Collection;
+use JsonSerializable;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -24,7 +26,7 @@ abstract class BasePresenter
     }
 
     /**
-     * @param array|object|null $data
+     * @param Collection|JsonSerializable|null $data
      * @return Response
      */
     protected function respondWithData($data = null): Response

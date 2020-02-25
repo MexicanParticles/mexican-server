@@ -12,7 +12,8 @@ class ViewUserOutputData
      * @var User
      */
     private $user;
-/**
+
+    /**
      * @param User $user
      */
     public function __construct(User $user)

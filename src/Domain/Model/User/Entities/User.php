@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Model\User\Entities;
 
-use Illuminate\Contracts\Support\Jsonable;
 use JsonSerializable;
 
 class User implements JsonSerializable
@@ -77,6 +76,7 @@ class User implements JsonSerializable
 
     /**
      * {@inheritDoc}
+     * @return mixed[]
      */
     public function jsonSerialize(): array
     {

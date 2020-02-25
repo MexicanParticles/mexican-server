@@ -72,7 +72,7 @@ class CommandInvoker
     }
 
     /**
-     * @param ReflectionClass $class
+     * @param ReflectionClass<Command> $class
      * @return bool
      */
     private function isParentCommand(ReflectionClass $class): bool

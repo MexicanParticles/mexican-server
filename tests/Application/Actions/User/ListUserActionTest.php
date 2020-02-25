@@ -22,10 +22,11 @@ class ListUserActionTest extends TestCase
 
         $user = new User(1, 'bill.gates', 'Bill', 'Gates');
 
+        $userCollection = collect([$user]);
         $userRepositoryProphecy = $this->prophesize(UserRepository::class);
         $userRepositoryProphecy
             ->findAll()
-            ->willReturn(collect([$user]))
+            ->willReturn($userCollection)
             ->shouldBeCalledOnce();
 
         $container->set(InMemoryUserRepository::class, $userRepositoryProphecy->reveal());
@@ -34,7 +35,7 @@ class ListUserActionTest extends TestCase
         $response = $app->handle($request);
 
         $payload = (string) $response->getBody();
-        $expectedPayload = new ActionPayload(200, [$user]);
+        $expectedPayload = new ActionPayload(200, $userCollection);
         $serializedPayload = json_encode($expectedPayload, JSON_PRETTY_PRINT);
 
         self::assertEquals($serializedPayload, $payload);

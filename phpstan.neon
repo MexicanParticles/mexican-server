@@ -2,3 +2,6 @@ parameters:
 	level: 7
 	paths:
 		- src
+	ignoreErrors:
+		- '#Parameter \#[1-9] \$argument of class ReflectionClass constructor expects class-string\<T of object\>\|T of object, [a-zA-Z\\]+ given#'
+	reportUnmatchedIgnoredErrors: false

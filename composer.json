@@ -56,6 +56,11 @@
         "phpcbf": "phpcbf --standard=./phpcs.xml -d memory_limit=1G --cache=.phpcs_cache -p",
         "phpcs": "phpcs --standard=./phpcs.xml -d memory_limit=1G --cache=.phpcs_cache -p --report=code",
         "phpstan": "phpstan analyse -c phpstan.neon --memory-limit=1G",
-        "phpstan_test": "phpstan analyse -c phpstan.test.neon --memory-limit=1G"
+        "phpstan_test": "phpstan analyse -c phpstan.test.neon --memory-limit=1G",
+        "analyze": [
+            "@phpcs",
+            "@phpstan",
+            "@phpstan_test"
+        ]
     }
 }

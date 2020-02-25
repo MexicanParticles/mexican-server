@@ -15,12 +15,15 @@ use Tests\TestCase;
  */
 class RedisStackableTest extends TestCase
 {
+    /**
+     * @var object|null
+     */
     private $redis;
 
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $app = $this->getAppInstance();
@@ -28,6 +31,9 @@ class RedisStackableTest extends TestCase
         $this->redis = new class ($redis) {
             use RedisStackableTrait;
 
+            /**
+             * @var Redis
+             */
             private $redis;
 
             public function __construct(Redis $redis)

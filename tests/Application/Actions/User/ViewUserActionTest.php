@@ -17,12 +17,12 @@ use Tests\TestCase;
 
 class ViewUserActionTest extends TestCase
 {
-    public function testAction()
+    public function testAction(): void
     {
         $app = $this->getAppInstance();
 
-        /** @var Container $container */
         $container = $app->getContainer();
+        assert($container instanceof Container);
 
         $user = new User(1, 'bill.gates', 'Bill', 'Gates');
 
@@ -41,10 +41,10 @@ class ViewUserActionTest extends TestCase
         $expectedPayload = new ActionPayload(200, $user);
         $serializedPayload = json_encode($expectedPayload, JSON_PRETTY_PRINT);
 
-        $this->assertEquals($serializedPayload, $payload);
+        self::assertEquals($serializedPayload, $payload);
     }
 
-    public function testActionThrowsUserNotFoundException()
+    public function testActionThrowsUserNotFoundException(): void
     {
         $app = $this->getAppInstance();
 
@@ -57,8 +57,8 @@ class ViewUserActionTest extends TestCase
 
         $app->add($errorMiddleware);
 
-        /** @var Container $container */
         $container = $app->getContainer();
+        assert($container instanceof Container);
 
         $userRepositoryProphecy = $this->prophesize(UserRepository::class);
         $userRepositoryProphecy
@@ -80,6 +80,6 @@ class ViewUserActionTest extends TestCase
 
         $serializedPayload = json_encode($expectedPayload, JSON_PRETTY_PRINT);
 
-        $this->assertEquals($serializedPayload, $payload);
+        self::assertEquals($serializedPayload, $payload);
     }
 }

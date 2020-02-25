@@ -9,8 +9,16 @@ namespace Tests\Helper;
  */
 trait AssertionTestableTrait
 {
+    /**
+     * @var string|false|null
+     */
     private $zendAssertions;
+
+    /**
+     * @var string|false|null
+     */
     private $assertException;
+
     final private function setAssertionSetting(): void
     {
         $this->zendAssertions = ini_get('zend.assertions');
@@ -21,9 +29,11 @@ trait AssertionTestableTrait
 
     final private function revertAssertionSetting(): void
     {
-        $this->zendAssertions = ini_get('zend.assertions');
-        $this->assertException = ini_get('assert.exception');
-        ini_set('zend.assertions', $this->zendAssertions);
-        ini_set('assert.exception', $this->assertException);
+        if (is_string($this->zendAssertions)) {
+            ini_set('zend.assertions', $this->zendAssertions);
+        }
+        if (is_string($this->assertException)) {
+            ini_set('assert.exception', $this->assertException);
+        }
     }
 }

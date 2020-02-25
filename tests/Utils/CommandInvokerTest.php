@@ -7,6 +7,7 @@ namespace Tests\Utils;
 use App\Utils\CommandInvoker;
 use DI\Container;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Tests\Resources\Commands\CommandA;
@@ -19,9 +20,24 @@ use Tests\Resources\Commands\NoCommand;
  */
 class CommandInvokerTest extends TestCase
 {
+    /**
+     * @var CommandInvoker|null
+     */
     private $invoker;
+
+    /**
+     * @var Container|ObjectProphecy|null
+     */
     private $container;
+
+    /**
+     * @var Application|ObjectProphecy|null
+     */
     private $console;
+
+    /**
+     * @var ConsoleOutputInterface|ObjectProphecy|null
+     */
     private $output;
 
     /**

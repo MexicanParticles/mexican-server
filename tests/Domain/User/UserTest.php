@@ -9,7 +9,10 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    public function userProvider()
+    /**
+     * @return array
+     */
+    public function userProvider(): array
     {
         return [
             [1, 'bill.gates', 'Bill', 'Gates'],
@@ -22,29 +25,29 @@ class UserTest extends TestCase
 
     /**
      * @dataProvider userProvider
-     * @param $id
-     * @param $username
-     * @param $firstName
-     * @param $lastName
+     * @param int $id
+     * @param string $username
+     * @param string $firstName
+     * @param string $lastName
      */
-    public function testGetters($id, $username, $firstName, $lastName)
+    public function testGetters(int $id, string $username, string $firstName, string $lastName): void
     {
         $user = new User($id, $username, $firstName, $lastName);
 
-        $this->assertEquals($id, $user->getId());
-        $this->assertEquals($username, $user->getUsername());
-        $this->assertEquals($firstName, $user->getFirstName());
-        $this->assertEquals($lastName, $user->getLastName());
+        self::assertEquals($id, $user->getId());
+        self::assertEquals($username, $user->getUsername());
+        self::assertEquals($firstName, $user->getFirstName());
+        self::assertEquals($lastName, $user->getLastName());
     }
 
     /**
      * @dataProvider userProvider
-     * @param $id
-     * @param $username
-     * @param $firstName
-     * @param $lastName
+     * @param int $id
+     * @param string $username
+     * @param string $firstName
+     * @param string $lastName
      */
-    public function testJsonSerialize($id, $username, $firstName, $lastName)
+    public function testJsonSerialize(int $id, string $username, string $firstName, string $lastName): void
     {
         $user = new User($id, $username, $firstName, $lastName);
 
@@ -55,6 +58,6 @@ class UserTest extends TestCase
             'lastName' => $lastName,
         ]);
 
-        $this->assertEquals($expectedPayload, json_encode($user));
+        self::assertEquals($expectedPayload, json_encode($user));
     }
 }

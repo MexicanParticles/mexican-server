@@ -53,6 +53,7 @@ class TestCase extends PHPUnit_TestCase
     ): Request {
         $uri = new Uri('', '', 80, $path);
         $handle = fopen('php://temp', 'w+');
+        assert(is_resource($handle));
         $stream = (new StreamFactory())->createStreamFromResource($handle);
 
         $h = new Headers();

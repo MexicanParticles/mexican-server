@@ -14,7 +14,7 @@ class ConnectRedisTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testConnecting()
+    public function testConnecting(): void
     {
         $app = $this->getAppInstance();
         $redis = $app->getContainer()->get(Redis::class);

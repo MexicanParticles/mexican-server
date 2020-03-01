@@ -23,7 +23,7 @@ class TestCase extends PHPUnit_TestCase
      */
     protected function getAppInstance(): App
     {
-        $app = require __DIR__ . '/../bootstrap/app.php';
+        $app = require __DIR__ . '/../app/bootstrap.php';
 
         // Register middleware
         $middleware = require __DIR__ . '/../app/middleware.php';

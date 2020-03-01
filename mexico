@@ -13,7 +13,7 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv::create(__DIR__);
 $dotenv->load();
 
-$app = require __DIR__ . '/bootstrap/app.php';
+$app = require __DIR__ . '/app/bootstrap.php';
 assert($app instanceof App);
 
 $container = $app->getContainer();

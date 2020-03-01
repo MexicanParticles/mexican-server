@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use App\Application\Presenters\User\ListUserPresenter;
@@ -33,7 +34,7 @@ return function (ContainerBuilder $containerBuilder): void {
             return $logger;
         },
         Redis::class => function (ContainerInterface $c): Redis {
-            return RedisAdapter::createConnection(
+            $redis = RedisAdapter::createConnection(
                 sprintf('redis://%s:%d', env('REDIS_NAME'), env('REDIS_PORT')),
                 [
                     'compression' => true,
@@ -46,6 +47,8 @@ return function (ContainerBuilder $containerBuilder): void {
                     'retry_interval' => 0,
                 ]
             );
+            assert($redis instanceof Redis);
+            return $redis;
         },
         ViewUserPresenter::class => function (ContainerInterface $c): ViewUserPresenter {
             return new ViewUserPresenter(new ResponseFactory());

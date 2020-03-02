@@ -1,0 +1,72 @@
+@startuml
+note as N
+  太字は final を表す
+end note
+
+package Card {
+    interface "Card"
+
+    package Attribute {
+        class "<b>Rank</b>" as Rank <<Multiton>> {
+            - __construct(number :int) :int
+            - number :int
+            + <b>getInstance(number :int)</b> :Rank
+            - <b>__clone()</b> :Rank
+        }
+
+        class "<b>RankFactory</b>" as RankFactory {
+            + <b>createCollection(start :int, end :int)</b> :Collection<Rank>
+        }
+
+        enum "<b>Suit</b>" as Suit {
+            + <b>value()</b> :mixed
+        }
+    }
+}
+
+package Trump {
+    class "TrumpCard" as TrumpCard {
+        - suit :Suit
+        - rank :Rank
+    }
+
+    class "TrumpDeckFactory" as TrumpDeckFactory {
+        - config :Config
+        - trumpCardFactory :TrumpCardFactory
+        - jokerFactory :JokerFactory
+        + createDeck() :Deck
+        + rejectFromDeck(card :TrumpCard) :bool
+    }
+
+    class "TrumpCardFactory" as TrumpCardFactory {
+        - rankFactory :RankFactory
+        + create(suit :Suit, rank :Rank) :TrumpCard
+        + createCollection(rankStart: int, rankEnd: int, suit: Suit[]) :Collection<TrumpCard>
+    }
+
+    class "JokerFactory" as JokerFactory {
+        + createCollection(numberOfJokers :int) :Collection<TrumpCard>
+    }
+}
+
+package Deck {
+    class "Deck" as Deck {
+        - deck :Collection<Card>
+        + <b>shuffle()</b> :void
+        + <b>draw()</b> :Card
+    }
+}
+
+TrumpCard *--> Rank
+TrumpCard *--> Suit
+TrumpCard ..|> Card :implements
+TrumpDeckFactory *--> JokerFactory
+TrumpDeckFactory *--> TrumpCardFactory
+TrumpDeckFactory --> Deck :create
+JokerFactory --> TrumpCard :create
+TrumpCardFactory --> TrumpCard :create
+TrumpCardFactory *--> RankFactory
+RankFactory --> Rank :create
+Deck *--> Card
+
+@enduml

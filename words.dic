@@ -1,7 +1,10 @@
 [D]
+dominos
 dotenv
+duplicable
 
 [I]
+initializable
 interactors
 
 [M]

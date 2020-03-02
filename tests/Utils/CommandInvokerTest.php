@@ -61,6 +61,8 @@ class CommandInvokerTest extends TestCase
      */
     public function testInvoke(): void
     {
+        $aaa = collect(['bbb'])->toUpper()->all();
+        var_dump($aaa);
         $this
             ->container
             ->getKnownEntryNames()

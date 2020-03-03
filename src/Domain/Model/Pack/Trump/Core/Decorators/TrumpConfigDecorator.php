@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Domain\Model\Pack\Trump\Core\ValueObjects;
+namespace App\Domain\Model\Pack\Trump\Core\Decorators;
 
 use App\Domain\Model\Card\Attribute\Core\ValueObjects\Rank;
 use App\Domain\Model\Card\Attribute\Core\ValueObjects\Suit;

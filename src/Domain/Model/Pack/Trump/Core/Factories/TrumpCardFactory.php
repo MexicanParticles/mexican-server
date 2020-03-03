@@ -45,7 +45,7 @@ class TrumpCardFactory
      */
     public function createFromValue(string $suit, int $rank): TrumpCard
     {
-        return TrumpCard::getInstance(
+        return $this->create(
             Suit::memberByValue($suit),
             Rank::getInstance($rank)
         );

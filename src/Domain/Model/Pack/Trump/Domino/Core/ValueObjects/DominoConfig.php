@@ -4,7 +4,7 @@ namespace App\Domain\Model\Pack\Trump\Domino\Core\ValueObjects;
 
 use App\Domain\Model\Card\Attribute\Core\ValueObjects\Rank;
 use App\Domain\Model\Pack\Trump\Core\Interfaces\TrumpConfigInterface;
-use App\Domain\Model\Pack\Trump\Core\ValueObjects\TrumpConfigDecorator;
+use App\Domain\Model\Pack\Trump\Core\Decorators\TrumpConfigDecorator;
 
 /**
  * @package App\Domain\Model\Pack\Trump\Domino\Core\ValueObjects

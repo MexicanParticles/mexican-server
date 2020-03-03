@@ -35,7 +35,7 @@ final class Suit extends AbstractAssertableEnumeration
     {
         assert(is_string($value), 'Values of constants should be string.');
         assert(
-            self::ensureIfOnlyConsistsOfWordCharacters((string) $value),
+            self::ensureIfOnlyConsistsOfWordChars((string) $value),
             'Values of constants should only consist of letters, numbers or underscores.'
         );
     }
@@ -44,7 +44,7 @@ final class Suit extends AbstractAssertableEnumeration
      * @param string $haystack
      * @return bool
      */
-    final private static function ensureIfOnlyConsistsOfWordCharacters(string $haystack): bool
+    final private static function ensureIfOnlyConsistsOfWordChars(string $haystack): bool
     {
         preg_match('/^\w+$/', $haystack, $matches);
         return reset($matches) === $haystack;

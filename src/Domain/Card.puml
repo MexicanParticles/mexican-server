@@ -4,69 +4,205 @@ note as N
 end note
 
 package Card {
-    interface "Card"
-
-    package Attribute {
-        class "<b>Rank</b>" as Rank <<Multiton>> {
-            - __construct(number :int) :int
-            - number :int
-            + <b>getInstance(number :int)</b> :Rank
-            - <b>__clone()</b> :Rank
+    package Card\Interfaces {
+        interface "Card" as Card
+    }
+    package Card\Attribute\Core {
+        package Card/Attribute/Core/Factories {
+            class "<b>RankFactory</b>" as RankFactory {
+                + <b>createCollection(start :Rank, end :Rank)</b> :Collection<Rank>
+            }
         }
-
-        class "<b>RankFactory</b>" as RankFactory {
-            + <b>createCollection(start :int, end :int)</b> :Collection<Rank>
-        }
-
-        enum "<b>Suit</b>" as Suit {
-            + <b>value()</b> :mixed
+        package Card\Attribute\Core\ValueObjects {
+            class "<b>Rank</b>" as Rank <<Multiton>> {
+                - {static}number :int
+                + {static}<b>getInstance(number :int)</b> :Rank
+                + <b>value()</b> :int
+                - __construct(number :int)
+                - <b>__clone()</b> :Rank
+            }
+            enum "<b>Suit</b>" as Suit {
+                + <b>value()</b> :mixed
+                # {static}<b>assertForValue(value :mixed)</b> :void
+                - {static}<b>ensureIfOnlyConsistsOfWordChars(haystack :string)</b> :bool
+            }
         }
     }
 }
 
-package Trump {
-    class "TrumpCard" as TrumpCard {
-        - suit :Suit
-        - rank :Rank
+package Pack\Trump {
+    package Pack\Trump\Core {
+        package Pack\Trump\Core\Factories {
+            class "<b>JokerFactory</b>" as JokerFactory {
+                + <b>createCollection(trumpConfig :TrumpConfig)</b> :Collection<TrumpCard>
+            }
+            class "TrumpDeckFactory" as TrumpDeckFactory {
+                - trumpCardFactory :TrumpCardFactory
+                - jokerFactory :JokerFactory
+                + createDeck(trumpConfig :TrumpConfig) :Deck
+                + rejectFromDeck(trumpConfig :TrumpConfig) :bool
+            }
+            class "TrumpCardFactory" as TrumpCardFactory {
+                - rankFactory :RankFactory
+                + create(suit :Suit, rank :Rank) :TrumpCard
+                + createFromValue(suit :int, rank :int) :TrumpCard
+                + createCollection(trumpConfig :TrumpConfig) :Collection<TrumpCard>
+            }
+        }
+        package Pack\Trump\Core\Builders {
+            class "TrumpConfigBuilder" as TrumpConfigBuilder {
+                # config :Repository
+                - numOfJoker :int|null
+                - startOfRank :int|null
+                - endOfRank :int|null
+                - suitCollection :Collection<Suit>|null
+                + <b>setNumOfJoker(numOfJoker :int)</b> :void
+                + <b>setStartOfRank(startOfRank :int)</b> :void
+                + <b>setEndOfRank(endOfRank :int)</b> :void
+                + <b>setSuitCollection(suitCollection :Collection<Suit>)</b> :void
+                # build() :TrumpConfigInterface
+                # initialize() :void
+            }
+        }
+        package Pack\Trump\Core\Decorators {
+            class "TrumpConfigDecorator" as TrumpConfigDecorator {
+                + __construct(trumpConfig :TrumpConfigInterface)
+                + <b>getNumOfJoker()</b> :int
+                + <b>getStartOfRank()</b> :Rank
+                + <b>getEndOfRank()</b> :Rank
+                + <b>getSuitCollection()</b> :Collection<Suit>
+            }
+        }
+        package Pack\Trump\Core\Entities {
+            class "TrumpCard" as TrumpCard {
+                - suit :Suit
+                - rank :Rank
+            }
+        }
+        package Pack\Trump\Card\Interfaces {
+            interface "TrumpConfigInterface" as TrumpConfigInterface {
+                + <b>getNumOfJoker()</b> :int
+                + <b>getStartOfRank()</b> :Rank
+                + <b>getEndOfRank()</b> :Rank
+                + <b>getSuitCollection()</b> :Collection<Suit>
+            }
+        }
+        package Pack\Trump\Core\ValueObjects {
+            class "TrumpConfig" as TrumpConfig {
+                - numOfJoker :int
+                - startOfRank :Rank
+                - endOfRank :Rank
+                - suitCollection :Collection<Suit>
+                + __construct(numOfJoker: int, startOfRank :Rank, endOfRank :Rank, suitCollection : Collection<Suit>)
+                + <b>getNumOfJoker()</b> :int
+                + <b>getStartOfRank()</b> :Rank
+                + <b>getEndOfRank()</b> :Rank
+                + <b>getSuitCollection()</b> :Collection<Suit>
+            }
+        }
     }
-
-    class "TrumpDeckFactory" as TrumpDeckFactory {
-        - config :Config
-        - trumpCardFactory :TrumpCardFactory
-        - jokerFactory :JokerFactory
-        + createDeck() :Deck
-        + rejectFromDeck(card :TrumpCard) :bool
-    }
-
-    class "TrumpCardFactory" as TrumpCardFactory {
-        - rankFactory :RankFactory
-        + create(suit :Suit, rank :Rank) :TrumpCard
-        + createCollection(rankStart: int, rankEnd: int, suit: Suit[]) :Collection<TrumpCard>
-    }
-
-    class "JokerFactory" as JokerFactory {
-        + createCollection(numberOfJokers :int) :Collection<TrumpCard>
+    package Pack\Trump\Domino\Core {
+        package Pack\Trump\Domino\Core\Builders {
+            class "DominoConfigBuilder" as DominoConfigBuilder {
+                # config :Repository
+                - baseOfRank :int|null
+                - isRankRotatable :bool|null
+                + <b>setBaseOfRank(baseOfRank: int)</b> :void
+                + <b>setIsRankRotatable(isRankRotatable: bool)</b> :void
+                # build() :DominoConfig
+                # initialize() :void
+            }
+        }
+        package Pack\Trump\Domino\Core\ValueObjects {
+            class "DominoConfig" as DominoConfig {
+                - baseOfRank :Rank
+                - isRankRotatable :bool
+                + __construct(trumpConfig: TrumpConfigInterface, baseOfRank :Rank, isRankRotatable :bool)
+                + <b>getBaseOfRank()</b> :Rank
+                + <b>isBaseOfRankEqualTo(rank: Rank)</b> :bool
+                + <b>isRankRotatable()</b> :bool
+            }
+        }
     }
 }
 
-package Deck {
+package Deck\Core\Entities {
     class "Deck" as Deck {
         - deck :Collection<Card>
         + <b>shuffle()</b> :void
         + <b>draw()</b> :Card
+        + <b>isEmpty()</b> :bool
     }
 }
+
+package Field\Trump\Domino\Core {
+    package Field\Trump\Domino\Core\Entities {
+        class "DominoField" as DominoField {
+            - field :DominoFieldState<DominoFieldState>
+            + <b>shuffle()</b> :void
+            + <b>draw()</b> :Card
+            + <b>isEmpty()</b> :bool
+        }
+    }
+    package Field\Trump\Domino\Core\Factories {
+        class "DominoFieldFactory" as DominoFieldFactory {
+            + <b>create(config :DominoConfig, deck :Deck)</b> :DominoField
+        }
+    }
+    package Field\Trump\Domino\Core\ValueObjects {
+        class "DominoFieldState" as DominoFieldState {
+            + <b>value()</b> :int
+            + <b>isSettable()</b> :bool
+        }
+    }
+}
+
+package Player\Core\Entities {
+    class "Player" as Player {
+        - uuid :Uuid
+        - name :string
+        - hand :Collection<Card>
+        + __construct(uuid: Uuid|null, name :string, hand :Collection<Card>)
+        + <b>getUuid()</b> :Uuid|null
+        + <b>getName()</b> :string
+        + <b>getHand()</b> :Collection<Card>
+        + jsonSerialize() :array
+    }
+}
+
+DominoFieldFactory --> DominoField :create
+DominoFieldFactory ..|> DominoConfig
+DominoFieldFactory ..|> Deck
+DominoField o--> DominoFieldState
+
+DominoConfigBuilder --> DominoConfig :create
+DominoConfigBuilder --|> TrumpConfigBuilder :extends
+DominoConfig --|> TrumpConfigDecorator :extends
+DominoConfig *--> TrumpConfigInterface
+
+TrumpDeckFactory --> Deck :create
+TrumpDeckFactory *--> JokerFactory
+TrumpDeckFactory *--> TrumpCardFactory
+TrumpDeckFactory ..> TrumpConfig
+
+TrumpCardFactory --> TrumpCard :create
+TrumpCardFactory *--> RankFactory
+TrumpCardFactory ..> TrumpConfig
+
+JokerFactory --> TrumpCard :create
+JokerFactory ..> TrumpConfig
+
+TrumpConfigBuilder --> TrumpConfig : build
+TrumpConfig ..|> TrumpConfigInterface :implements
+TrumpConfigDecorator *--> TrumpConfigInterface
 
 TrumpCard *--> Rank
 TrumpCard *--> Suit
 TrumpCard ..|> Card :implements
-TrumpDeckFactory *--> JokerFactory
-TrumpDeckFactory *--> TrumpCardFactory
-TrumpDeckFactory --> Deck :create
-JokerFactory --> TrumpCard :create
-TrumpCardFactory --> TrumpCard :create
-TrumpCardFactory *--> RankFactory
-RankFactory --> Rank :create
-Deck *--> Card
+
+RankFactory -down-> Rank :create
+
+Deck o--> Card
+Player o--> Card
 
 @enduml

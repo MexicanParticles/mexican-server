@@ -7,7 +7,7 @@ namespace App\Domain\Model\User\Entities;
 use App\Domain\Model\Card\Interfaces\Card;
 use Illuminate\Support\Collection;
 use JsonSerializable;
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @package App\Domain\Model\User\Entities
@@ -15,38 +15,38 @@ use Ramsey\Uuid\Uuid;
 class Player implements JsonSerializable
 {
     /**
-     * @var Uuid|null
+     * @var UuidInterface
      */
-    private $uuid;
+    private UuidInterface $UuidInterface;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var Collection<Card>
      */
-    private $hand;
+    private Collection $hand;
 
     /**
-     * @param Uuid|null        $uuid
+     * @param UuidInterface    $UuidInterface
      * @param string           $name
      * @param Collection<Card> $hand
      */
-    public function __construct(?Uuid $uuid, string $name, Collection $hand)
+    public function __construct(UuidInterface $UuidInterface, string $name, Collection $hand)
     {
-        $this->uuid = $uuid;
+        $this->UuidInterface = $UuidInterface;
         $this->name = $name;
         $this->hand = $hand;
     }
 
     /**
-     * @return Uuid|null
+     * @return UuidInterface
      */
-    public function getUuid(): ?Uuid
+    public function getUuidInterface(): UuidInterface
     {
-        return $this->uuid;
+        return $this->UuidInterface;
     }
 
     /**
@@ -72,7 +72,7 @@ class Player implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'uuid' => $this->getUuid()->toString(),
+            'UuidInterface' => $this->getUuidInterface()->toString(),
             'name' => $this->getName(),
             'hand' => $this->getHand()->all(),
         ];
